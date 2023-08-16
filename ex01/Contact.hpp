@@ -8,6 +8,7 @@ class Contact
 {
 	public:
 		static Contact addContact(void);
+		bool isValid(void) const;
 		void display(void) const;
 		std::string const&getFirstName() const;
 		std::string const&getLastName() const;
@@ -16,6 +17,10 @@ class Contact
 		std::string const&getDarkestSecret() const;
 	private:
 		std::string firstName;
+		std::string lastName;
+		std::string nickname;
+		std::string phoneNbr;
+		std::string darkestSecret;
 };
 
 // std::string: This is the return type of the function.

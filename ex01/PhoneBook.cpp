@@ -1,7 +1,5 @@
 #include "PhoneBook.hpp"
 
-#include <iomanip>
-
 PhoneBook::PhoneBook() : contact_idx(0), contact_count(0){}
 
 t_command	PhoneBook::prompt(void)
@@ -32,6 +30,11 @@ void	PhoneBook::addContact()
 {
 	Contact contact = Contact::addContact();
 
+	if (!contact.isValid())
+	{
+		std::cout << "Invalid contact!" << std::endl;
+		return ;
+	}
 	contacts[contact_idx] = contact;
 	contact_idx = (contact_idx + 1) % max_contacts;
 	if (contact_count < max_contacts)
@@ -58,8 +61,8 @@ void	PhoneBook::searchContact() const
 		std::cout << std::right
 			<< std::setw(10) << i << "|"
 			<< std::setw(10) << truncate(contacts[i].getFirstName()) << "|"
-			<< std::setw(10) << truncate(" ") << "|"
-			<< std::setw(10) << truncate(" ")
+			<< std::setw(10) << truncate(contacts[i].getLastName()) << "|"
+			<< std::setw(10) << truncate(contacts[i].getNickname())
 			<< std::endl;
 	}
 	std::cout << "Give index: ";
@@ -72,6 +75,6 @@ void	PhoneBook::searchContact() const
 		std::cout << "¯\\_(ツ)_/¯" << std::endl;
 		return;
 	}
-	// contacts[contact_index].display();
+	contacts[contact_index].display();
 }
 
